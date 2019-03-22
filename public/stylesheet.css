@@ -24,6 +24,8 @@ text {
     font-weight: 600;
 }
 
+/* */
+
 #welcome {
     display: flex;
     flex-direction: column;
@@ -58,11 +60,36 @@ text {
     /* right: 40%; */
 }
 
+.Title {
+    margin-top: 100px;
+}
+
+Typist {
+    margin-top: 0;
+    position: absolute;
+    top: 0;
+}
+
+Typist > h1 {
+    display: inline-block;
+    text-align: center;
+    margin: 0px 0% 0px 15%;
+    font-size: 30px;
+    color: #fff;
+    letter-spacing: 1.2px;
+    word-spacing: 1.2px;
+    padding: 15px;
+}
+
+.registration-container {
+    text-align: center;
+}
+
 h1,
 h3 {
     display: inline-block;
     text-align: center;
-    margin: 70px 15% 70px 15%;
+    margin: 10px 15% 70px 15%;
     font-size: 30px;
     color: #fff;
     letter-spacing: 1.2px;

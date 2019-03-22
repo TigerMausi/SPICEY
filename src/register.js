@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "./axios";
-
+import Typist from "react-typist";
 import { Link } from "react-router-dom";
 
 export default class Registration extends React.Component {
@@ -17,6 +17,11 @@ export default class Registration extends React.Component {
             [e.target.name]: e.target.value
         }); //check state?
     }
+
+    componentDidMount() {
+        new TypeIt(this.el, this.props);
+    }
+
     handleSubmit(e) {
         e.preventDefault();
 
@@ -68,17 +73,19 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div className="registration-container">
-                <h1 id="welcome">
-                    Register now to ConnectMars,
-                    <br />
-                    the only social network that focuses in connecting people
-                    from Earth and Mars!
-                    <br />
-                    <br />
-                    <span>
-                        Start talking with your martian friends and family!
-                    </span>
-                </h1>
+                <h1 className="Title"> Welcome to SPICEY!</h1>
+                <Typist>
+                    <h1>A virtual assistant that talks to your child...</h1>
+                    <Typist.Backspace count={47} delay={400} />
+                    <h1>
+                        For children who have difficulties communicating, SPICEY
+                        can be an an effective helper to interact in a safe
+                        environment and to train their thinking.
+                    </h1>
+                    <Typist.Backspace count={18} delay={400} />
+                    <h1> Start your journey now!</h1>
+                    <Typist.Backspace count={18} delay={400} />
+                </Typist>
                 <form>
                     {this.state.error && (
                         <div className="error">Oops! Please try again!</div>
