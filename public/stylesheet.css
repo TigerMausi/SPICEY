@@ -64,10 +64,12 @@ text {
     margin-top: 100px;
 }
 
-Typist {
-    margin-top: 0;
-    position: absolute;
-    top: 0;
+.Typist {
+    /* margin-top: 0; */
+    /* position: absolute; */
+    /* top: 0; */
+    width: auto;
+    height: 200px;
 }
 
 Typist > h1 {
@@ -87,14 +89,14 @@ Typist > h1 {
 
 h1,
 h3 {
-    display: inline-block;
+    /* display: inline-block;
     text-align: center;
     margin: 10px 15% 70px 15%;
     font-size: 30px;
     color: #fff;
     letter-spacing: 1.2px;
     word-spacing: 1.2px;
-    padding: 15px;
+    padding: 15px; */
 }
 
 /* REGISTRATION FORM */

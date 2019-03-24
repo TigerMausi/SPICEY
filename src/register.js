@@ -73,8 +73,8 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div className="registration-container">
-                <h1 className="Title"> Welcome to SPICEY!</h1>
-                <Typist>
+                <Typist avgTypingSpeed={40} startDelay={200}>
+                    <h1 className="Title"> Welcome to SPICEY!</h1>
                     <h1>A virtual assistant that talks to your child...</h1>
                     <Typist.Backspace count={47} delay={400} />
                     <h1>
