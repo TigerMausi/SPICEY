@@ -47,12 +47,7 @@ export default class Login extends React.Component {
     render() {
         return (
             <div className="login-container">
-                <h1>
-                    <span>
-                        Login to your account and start talking with your
-                        martian friends or family!
-                    </span>
-                </h1>
+                <h1>Login to your account and start your journey now!</h1>
                 <form onSubmit={this.handleSubmit}>
                     {this.state.error && (
                         <div className="error">

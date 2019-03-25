@@ -90,3 +90,23 @@ export async function getNewChatMessage(data) {
         newChatMessage: data
     };
 }
+
+// ----------- TALKING SPICEY ----------
+export async function getAIResponses(data) {
+    console.log(" DATA IN newChatMessage", data);
+
+    return {
+        type: "GET_NEW_AI_RESPONSE",
+        AIResponse: data
+    };
+}
+
+//------- USER TALKING -------
+export async function getUserResponses(data) {
+    console.log(" DATA IN newChatMessage", data);
+
+    return {
+        type: "GET_NEW_AI_RESPONSE",
+        AIResponse: data
+    };
+}

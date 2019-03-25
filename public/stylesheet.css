@@ -9,7 +9,13 @@
 }
 
 body {
-    background-color: #222222;
+    background-color: #3f9db4;
+}
+
+p {
+    letter-spacing: 2px;
+    color: #011627;
+    font-size: 30px;
 }
 
 path {
@@ -34,7 +40,7 @@ text {
 
 #logo-container {
     width: 100%;
-    height: 300px;
+    height: 400px;
 }
 
 .mainLogo {
@@ -97,21 +103,47 @@ h3 {
     letter-spacing: 1.2px;
     word-spacing: 1.2px;
     padding: 15px; */
+    margin: 15px 100px;
+    padding-top: 15px;
+    color: #efffe9;
+    text-align: center;
+}
+
+div.Typist {
+    /* transition: 3s;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+    transform: translateY(-10px) scale(1.02);
+
+    .entry-title {
+        background-position: -100% 0;
+    } */
+}
+
+h2 {
+    color: #efffe9;
+    margin: 5px;
+    letter-spacing: 1.5px;
+    word-spacing: 1px;
+    padding: 10px;
 }
 
 /* REGISTRATION FORM */
 form {
     text-align: center;
+    background-color: #72bfce;
     color: tomato;
-    margin-top: 20px;
+    margin-top: 80px;
     margin-bottom: 50px;
     margin-left: 0px;
-    border-top: 1px solid white;
-    border-bottom: 1px solid white;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    box-shadow: 10px solid white;
     padding: 20px 0;
     border-radius: 3%;
     display: flex;
     align-items: center;
+    /* box-shadow: 10px 10px; */
+    box-shadow: 0px 3px 164px white;
 }
 
 input {
@@ -127,6 +159,8 @@ input {
     border-radius: 15px;
     letter-spacing: 1px;
     box-shadow: 2px 1.8px #6cbbb3;
+    color: aqua;
+    background-color: #efffe9;
 }
 
 .header-container {
@@ -175,13 +209,20 @@ input {
     top: 50%;
     right: 10%; */
     /* box-shadow: 5px 10px #000; */
+    /* box-shadow: 5px 10px #000; */
+    /* box-shadow: 5px 10px #000; */
+    /* box-shadow: 5px 10px #000; */
+    /* box-shadow: 5px 10px #000; */
+    /* box-shadow: 5px 10px #000; */
+    /* box-shadow: 5px 10px #000; */
     display: flex;
     justify-content: space-between;
     margin-top: 5px;
-    background-image: url(./images/zb3234.jpg);
+    background-image: url(./images/patterns.jpg);
     background-size: contain;
     background-repeat-x: repeat;
     height: 80vh;
+    border-radius: 10px;
 }
 
 /* PROFILE IMG */
@@ -217,9 +258,14 @@ span {
     animation: animate 8s linear infinite;
     -webkit-background-clip: text;
     -webkit-text-fill-color: rgba(255, 255, 255, 0); */
+    /* margin: 15px; */
+    padding-top: 17px;
+    color: #e33b3b;
+    /* animation: blink 10s linear infinite; */
+}
 
-    color: white;
-    animation: blink 3s linear infinite;
+a > span {
+    animation: blink 4s linear infinite;
 }
 
 a:hover {
@@ -235,12 +281,12 @@ a:hover {
 }
 
 h1:hover {
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+    /* box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
     transform: translateY(-10px) scale(1.02);
 
     .entry-title {
         background-position: -100% 0;
-    }
+    } */
 }
 
 img:hover {
@@ -296,8 +342,9 @@ one is the image on the right
 }
 
 a {
-    color: tomato;
-    margin: 120px;
+    color: #011627;
+    margin: 140px;
+    padding: 15px 15px 10px 15px;
     text-align: center;
     text-decoration: none;
     position: absolute;
@@ -527,14 +574,16 @@ height: 180px;
 
 /*  --------  INPUT CONTAINER  ------ */
 .input-container {
-    margin-left: 80px;
+    margin-left: 200px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 /* FOR THE BUTTONS IN REGISTER & LOGIN */
 #submit {
-    border: 2px dotted #6cbbb3;
-    background: #6cbbb3;
-    color: inherit;
+    border: none;
+    background: #011627;
+    color: #efffe9;
     cursor: pointer;
     margin: 15px 30px;
     letter-spacing: 1.4px;
@@ -542,37 +591,35 @@ height: 180px;
     padding: 20px 20px 20px 20px;
     text-align: center;
     border-radius: 15px;
-    box-shadow: inset 0 0 10px grey;
-    letter-spacing: 1px;
-    box-shadow: 0 9px #999;
-
+    box-shadow: inset 0 0 10px white;
+    letter-spacing: 2px;
+    font-size: 25px;
     transition: width 12s, height 14s;
     -webkit-transition: 0.4s;
-
     -webkit-animation-name: greenPulse;
     -webkit-animation-duration: 2s;
-    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: 4;
 }
 
 /* ANIMATION FOR BUTTONS INSPIRED BY CODEPEN */
 @-webkit-keyframes greenPulse {
     from {
-        background-color: #6cbbb3;
-        -webkit-box-shadow: 0 0 9px #333;
+        background-color: #011627;
+        -webkit-box-shadow: 0 0 10px #fff;
     }
     50% {
-        background-color: #6cbbb3;
-        -webkit-box-shadow: 0 0 18px #fff;
+        background-color: #000;
+        -webkit-box-shadow: 0 0 22px #fff;
     }
     to {
-        background-color: #6cbbb3;
-        -webkit-box-shadow: 0 0 9px #333;
+        background-color: #011627;
+        -webkit-box-shadow: 0 0 10px #fff;
     }
 }
 
 #submit:hover {
-    -moz-transition: all 5.8s;
-    -webkit-box-shadow: inset 0 0 10px #000000;
+    -moz-transition: all 3.8s;
+    -webkit-box-shadow: inset 0 0 10px #000;
     animation: none;
 }
 
@@ -627,13 +674,26 @@ textarea {
     margin-right: auto;
 }
 
+.prof-container {
+    position: absolute;
+    /* position: relative; */
+    width: 300px;
+    height: 200px;
+    font-size: 30px;
+    text-align: center;
+    margin-left: 1200px;
+    margin-top: 250px;
+}
+
 .profile-pic {
-    margin-left: 10%;
+    margin-left: 20%;
     height: 10;
     object-fit: contain;
     object-position: bottom;
-    height: 500px;
-    width: 600px;
+    height: 560px;
+    width: 550px;
+    border-radius: 50%;
+    border: 2px solid black;
 }
 
 .image {
@@ -651,22 +711,24 @@ textarea {
 }
 
 .bioEditor-container {
-    width: 800px;
-    height: 450px;
+    width: 770px;
+    height: 600px;
     margin-top: 210px;
-    margin-right: 5%;
+    margin-right: 10%;
     background-repeat: unset;
     background-size: contain;
-    border: 2px solid grey;
+    border: o.1px solid black;
     box-shadow: 5px solid green;
-    background-color: #1c1d1f;
+    background-color: #3f9db4;
     /* background: aqua; */
     border-radius: 10px;
-    box-shadow: 10px 10px 5px black;
+    box-shadow: 0px 1px 40px 10px black;
 }
 
 div {
-    color: white;
+    margin-top: 10px;
+    letter-spacing: 1px;
+    word-spacing: 1px;
 }
 
 .bio-text-container {
@@ -765,6 +827,26 @@ video {
     margin-left: 40px;
 }
 
+/* buttons for new pages */
+.buttons-container {
+    width: 500px;
+    /* height: 500px; */
+    position: absolute;
+    top: 50px;
+    right: 0;
+}
+
+#nav-buttons-start {
+    width: 400px;
+    left: 10px;
+}
+
+#nav-buttons-fun {
+    width: 400px;
+    top: 50px;
+    left: 10px;
+}
+
 .infos-other-profile {
     width: 300px;
     height: 300px;
@@ -778,7 +860,7 @@ video {
 
 /* EDITOR CONTAINER BIO */
 .bio-text-container {
-    margin-top: 20px;
+    margin-top: 370px;
 }
 
 .navigation-container {

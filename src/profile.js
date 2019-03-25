@@ -1,6 +1,7 @@
 import React from "react";
 import ProfilePic from "./profilepic";
 import BioEditor from "./bioeditor";
+import { Link } from "react-router-dom";
 
 export default class Profile extends React.Component {
     constructor(props) {
@@ -19,6 +20,12 @@ export default class Profile extends React.Component {
         // </div>
         return (
             <div className="profile-container">
+                <Link to="/startSpicey">
+                    <button className="startSpicey" onClick={this.handleClick}>
+                        start Spicey
+                    </button>
+                </Link>
+
                 <div className="image">
                     <ProfilePic
                         image={this.props.image}

@@ -8,6 +8,8 @@ import Online from "./online";
 import Chat from "./chat";
 import { BrowserRouter, Route } from "react-router-dom";
 import ProfilePic from "./profilepic";
+import StartSpicey from "./setupspicey";
+import { Link } from "react-router-dom";
 
 // MAKING THE UPLOADER
 // want to randomily assign a photo that is connected to the id, but as soon as it has been set to be fixed @checklater!
@@ -109,6 +111,26 @@ export default class App extends React.Component {
                     </div>
 
                     <div className="content-container">
+                        <div className="prof-container">
+                            <div>Your Profile: </div>
+                            <br />
+                            {this.state.firstName}
+
+                            {this.state.lastName}
+
+                            <div className="buttons-container">
+                                <a href="/playGame" id="nav-buttons-fun">
+                                    HAVE SOME FUN!
+                                </a>
+                            </div>
+
+                            <div className="buttons-container">
+                                <a href="/playGame" id="nav-buttons-fun">
+                                    HAVE SOME FUN!
+                                </a>
+                            </div>
+                        </div>
+
                         {this.state.uploaderIsVisible && (
                             <Uploader
                                 hideUploader={this.hideUploader}
@@ -142,6 +164,11 @@ export default class App extends React.Component {
                                     component={Online}
                                 />
                                 <Route path="/chat" component={Chat} />
+
+                                <Route
+                                    path="/startSpicey"
+                                    component={StartSpicey}
+                                />
                             </div>
                         </BrowserRouter>
                     </div>

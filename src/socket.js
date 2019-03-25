@@ -4,7 +4,8 @@ import {
     userJoined,
     userLeft,
     getChatMessages,
-    getNewChatMessage
+    getNewChatMessage,
+    getAIResponses
 } from "./actions";
 let socket;
 
@@ -15,6 +16,15 @@ let socket;
 export function getSocket(store) {
     if (!socket) {
         socket = io.connect();
+
+        // SPICEY TALK TO BE TRIGGERED EVENT
+        socket.on("AIResponseToUser", data => {
+            // PUSH SPICEY RESPONE TO STORE
+            store.dispatch(getAIResponses(data));
+
+            // RENDER SPICEY RESPONSE
+            synthVoice(data);
+        });
 
         socket.on("onlineUsers", data => {
             store.dispatch(getOnlineUsers(data));
@@ -42,4 +52,29 @@ export function getSocket(store) {
     }
 
     return socket;
+}
+
+// CREATE SYNTHETIC VOICE FOR COMPUTER
+function synthVoice(text) {
+    // CREATE CONTEXT FOR SPEECH SYNTHESIS
+    const synth = window.speechSynthesis;
+
+    //SpeechSynthesis.getVoices()
+    //DEFINE THE ACCENT later
+
+    // CREATE NEW INSTANCE OF SpeechSynthesisUtterance
+    const msg = new SpeechSynthesisUtterance();
+
+    var voices = synth.getVoices();
+
+    // DEFINE WHAT TEXT COMPUTER WILL BE SPEAKING
+    msg.text = text;
+
+    // CUSTOMIZE COMPUTER'S VOICE
+    msg.voiceURI = "Native";
+    msg.volume = 1;
+    msg.rate = 1;
+    msg.lang = "en-GB";
+
+    synth.speak(msg);
 }

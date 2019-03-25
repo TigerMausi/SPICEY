@@ -73,18 +73,31 @@ export default class Registration extends React.Component {
     render() {
         return (
             <div className="registration-container">
-                <Typist avgTypingSpeed={40} startDelay={200}>
-                    <h1 className="Title"> Welcome to SPICEY!</h1>
-                    <h1>A virtual assistant that talks to your child...</h1>
-                    <Typist.Backspace count={47} delay={400} />
+                <Typist avgTypingSpeed={20} startDelay={200}>
                     <h1>
-                        For children who have difficulties communicating, SPICEY
+                        <span>
+                            A virtual assistant that talks to your child...
+                        </span>
+                        <Typist.Backspace delay={900} Delay ms={1250} />
+                    </h1>
+                    <Typist.Backspace count={21} delay={900} Delay ms={1250} />
+                    <h1>
+                        <Typist.Backspace
+                            count={26}
+                            delay={900}
+                            Delay
+                            ms={1250}
+                        />
+                        For children who have difficulties communicating, <br />
+                        <span>SPICEY</span> <br />
                         can be an an effective helper to interact in a safe
                         environment and to train their thinking.
                     </h1>
-                    <Typist.Backspace count={18} delay={400} />
-                    <h1> Start your journey now!</h1>
-                    <Typist.Backspace count={18} delay={400} />
+                    <Typist.Backspace count={149} delay={700} />
+                    <Typist.Backspace delay={3900} Delay ms={1250} />
+                    <h1>
+                        <span>Start your journey now!</span>
+                    </h1>
                 </Typist>
                 <form>
                     {this.state.error && (
