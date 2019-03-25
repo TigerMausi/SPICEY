@@ -25,6 +25,11 @@ export default class Profile extends React.Component {
                         start Spicey
                     </button>
                 </Link>
+                <Link to="/startGame">
+                    <button className="startGame" onClick={this.handleClick}>
+                        start Game
+                    </button>
+                </Link>
 
                 <div className="image">
                     <ProfilePic

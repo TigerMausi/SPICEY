@@ -9,6 +9,7 @@ import Chat from "./chat";
 import { BrowserRouter, Route } from "react-router-dom";
 import ProfilePic from "./profilepic";
 import StartSpicey from "./setupspicey";
+import StartGame from "./game";
 import { Link } from "react-router-dom";
 
 // MAKING THE UPLOADER
@@ -117,18 +118,6 @@ export default class App extends React.Component {
                             {this.state.firstName}
 
                             {this.state.lastName}
-
-                            <div className="buttons-container">
-                                <a href="/playGame" id="nav-buttons-fun">
-                                    HAVE SOME FUN!
-                                </a>
-                            </div>
-
-                            <div className="buttons-container">
-                                <a href="/playGame" id="nav-buttons-fun">
-                                    HAVE SOME FUN!
-                                </a>
-                            </div>
                         </div>
 
                         {this.state.uploaderIsVisible && (
@@ -168,6 +157,10 @@ export default class App extends React.Component {
                                 <Route
                                     path="/startSpicey"
                                     component={StartSpicey}
+                                />
+                                <Route
+                                    path="/startGame"
+                                    component={StartGame}
                                 />
                             </div>
                         </BrowserRouter>
