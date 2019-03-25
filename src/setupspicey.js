@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getSocket } from "./socket";
 import axios from "axios";
 import { getUserResponses } from "./actions";
+import { store } from "./start";
 
 export default class StartSpicey extends React.Component {
     constructor(props) {

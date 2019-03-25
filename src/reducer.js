@@ -2,6 +2,26 @@ export default function reducer(state = {}, action) {
     // RETURNS A NEW GLOBAL STATE OBJ. THAT HAS PROPERTY OF friendsWannabees
     // Return a new state object that contains a property
     // called friendsWannabees whose value is the array we got back from the server
+
+    // PUSH USERS RECENT RESPONSE TO STATE
+    if (action.type == "GET_NEW_USER_RESPONSE") {
+        state = {
+            //CLONE REDUX STATE
+            ...state,
+            friendsKey: action.friendsKey
+        };
+    }
+
+    // PUSH SPICY RECENT RESPONSE TO STATE
+    if (action.type == "GET_NEW_AI_RESPONSE") {
+        state = {
+            //CLONE REDUX STATE
+            ...state,
+            friendsKey: action.friendsKey
+        };
+    }
+    console.log("STATE IN REDUCER ", state);
+
     if (action.type == "RECEIVE_FRIENDS_WANNABIES") {
         state = {
             //CLONE REDUX STATE

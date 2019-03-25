@@ -1,4 +1,5 @@
 import axios from "./axios";
+import { getSocket } from "./socket";
 
 // Here we will do all the AXIOS REQUESTS
 // Every function we write MUST RETURN AN OBJECT
@@ -93,20 +94,25 @@ export async function getNewChatMessage(data) {
 
 // ----------- TALKING SPICEY ----------
 export async function getAIResponses(data) {
-    console.log(" DATA IN newChatMessage", data);
+    console.log(" DATA IN getAIResponses", data);
 
     return {
         type: "GET_NEW_AI_RESPONSE",
-        AIResponse: data
+        response: data
     };
 }
 
 //------- USER TALKING -------
 export async function getUserResponses(data) {
-    console.log(" DATA IN newChatMessage", data);
+    console.log(" DATA IN getUserResponses", data);
 
     return {
-        type: "GET_NEW_AI_RESPONSE",
-        AIResponse: data
+        type: "GET_NEW_USER_RESPONSE",
+        response: data
     };
+
+    // EMMIT THE USER COMMENT TO SERVER
+    socket.emit("userResponse", {
+        response
+    });
 }
