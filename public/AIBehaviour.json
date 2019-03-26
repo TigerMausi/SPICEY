@@ -1,0 +1,78 @@
+[
+    {
+        "keyword": "",
+        "variations": [
+            " ",
+            " I don't want to talk ",
+            " I don't want to talk to you ",
+            " I don't care "
+        ],
+        "responses": [
+            " Why don't you want to talk to me? I am here to help you",
+            " Do you want to play a game instead of talking to me, I am sure it will be fun ",
+            " Did you said something or was it just silence? ",
+            " Hello, knock knock. Is anybody there?"
+        ]
+    },
+
+    {
+        "keyword": " I am ",
+        "variations": [" My name is ", " Nice to meet you", " I am "],
+        "responses": [
+            " Nice to meet you, what plans do you have for today?",
+            " Nice to meet you, how are you today?",
+            " Nice to meet you, do you want to have some fun playing a game I prepared for you?"
+        ]
+    },
+
+    {
+        "keyword": "Yes",
+        "variations": [
+            " Yes, I want to play ",
+            " I would like to play ",
+            " sure "
+        ],
+        "responses": [" Then let's start our game", " Then let's play"]
+    },
+    {
+        "keyword": "play",
+        "variations": [" Yes, I want to play ", " I would like to play "],
+        "responses": [" Then let's start our game", " Then let's play"]
+    },
+    {
+        "keyword": "No",
+        "variations": [
+            " No, I dont want to play ",
+            " I would rather not play ",
+            " I don't have time for that"
+        ],
+        "responses": [
+            " Okay, then what do you want to do next?",
+            " What would you rather do?"
+        ]
+    },
+
+    {
+        "keyword": "not sure",
+        "variations": ["I don't know", "I am not sure"],
+        "responses": [
+            " Okay, then what would you rather do?",
+            " Do you have something in mind?"
+        ]
+    },
+    {
+        "keyword": "hello",
+        "variations": ["Hello", "hi"],
+        "responses": [" Greetings", " Hello to you"]
+    },
+    {
+        "keyword": "false",
+        "variations": ["falsey", "false"],
+        "responses": [" What is false"]
+    },
+    {
+        "keyword": "how are you",
+        "variations": ["how are you?", "hello, how are you?"],
+        "responses": [" I am very hungry and you?"]
+    }
+]

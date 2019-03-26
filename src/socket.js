@@ -5,8 +5,16 @@ import {
     userLeft,
     getChatMessages,
     getNewChatMessage,
-    getAIResponses
+    getAIResponses,
+    getUserResponses
 } from "./actions";
+
+import React from "react";
+import axios from "axios";
+
+//import store for dispatch METHOD
+import { store } from "./start";
+
 let socket;
 
 // ALTERNATIVE COMMUNICATION DIFFERENT THAN AXIOS
@@ -19,8 +27,27 @@ export function getSocket(store) {
 
         // SPICEY TALK TO BE TRIGGERED EVENT
         socket.on("AIResponseToUser", data => {
+            console.log("data in AI RESPONSE USER", data);
             // PUSH SPICEY RESPONE TO STORE
             store.dispatch(getAIResponses(data));
+
+            // RENDER SPICEY RESPONSE
+            synthVoice(data);
+        });
+
+        socket.on("getAIResponses", data => {
+            console.log("data in AI RESPONSE!!!", data);
+            // PUSH SPICEY RESPONE TO STORE
+            // store.dispatch(getAIResponses(data));
+
+            // RENDER SPICEY RESPONSE
+            synthVoice(data);
+        });
+
+        socket.on("UserResponseToAI", data => {
+            console.log("data in UserResponseToAI", data);
+            // PUSH SPICEY RESPONE TO STORE
+            store.dispatch(getUserResponses(data));
 
             // RENDER SPICEY RESPONSE
             synthVoice(data);

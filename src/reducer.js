@@ -8,7 +8,7 @@ export default function reducer(state = {}, action) {
         state = {
             //CLONE REDUX STATE
             ...state,
-            friendsKey: action.friendsKey
+            response: action.response
         };
     }
 
@@ -17,7 +17,7 @@ export default function reducer(state = {}, action) {
         state = {
             //CLONE REDUX STATE
             ...state,
-            friendsKey: action.friendsKey
+            response: action.response
         };
     }
     console.log("STATE IN REDUCER ", state);

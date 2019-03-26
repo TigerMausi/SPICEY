@@ -106,13 +106,13 @@ export async function getAIResponses(data) {
 export async function getUserResponses(data) {
     console.log(" DATA IN getUserResponses", data);
 
+    // EMMIT THE USER COMMENT TO SERVER
+    getSocket().emit("UserResponseToAI", {
+        response: data
+    });
+
     return {
         type: "GET_NEW_USER_RESPONSE",
         response: data
     };
-
-    // EMMIT THE USER COMMENT TO SERVER
-    socket.emit("userResponse", {
-        response
-    });
 }

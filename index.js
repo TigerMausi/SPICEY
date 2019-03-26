@@ -17,6 +17,7 @@ const cookieParser = require("cookie-parser");
 //Protecting Against CSRF Attacks
 const csurf = require("csurf");
 const bcrypt = require("./bcrypt");
+const jsonBehaviour = require("./public/AIBehaviour");
 //--------
 
 // -- COOKIE SESSION ---
@@ -157,7 +158,7 @@ app.post("/register", (req, res) => {
         req.body.password != ""
     ) {
         bcrypt.hashPassword(req.body.password).then(hash => {
-            console.log("hash", hash);
+            //console.log("hash", hash);
             return db
                 .createUser(req.body.first, req.body.last, req.body.email, hash)
                 .then(data => {
@@ -179,7 +180,7 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    console.log("req.body.email", req.body.email);
+    //console.log("req.body.email", req.body.email);
     db.getUserByEmail(req.body.email)
         .then(data => {
             if (data.rows.length > 0) {
@@ -188,10 +189,10 @@ app.post("/login", (req, res) => {
                     .then(passedAuth => {
                         if (passedAuth === true) {
                             req.session.userId = data.rows[0].id;
-                            console.log(
-                                "req.session.userId",
-                                req.session.userId
-                            );
+                            // console.log(
+                            //     "req.session.userId",
+                            //     req.session.userId
+                            // );
                             res.json({ success: true });
                         } else {
                             res.json({ success: false });
@@ -230,12 +231,12 @@ app.post("/upload", uploader.single("file"), s3.upload, (req, res) => {
         //INSERT - title, description, username, s3Url + filename
         //CONCATENATE file
         var url = s3Url.s3Url + req.file.filename;
-        console.log("req.file.filename", req.file.filename);
-        console.log("url", url);
+        // console.log("req.file.filename", req.file.filename);
+        // console.log("url", url);
 
         db.updateImage(req.session.userId, url)
             .then(data => {
-                console.log(data);
+                //console.log(data);
                 res.json(data.rows);
             })
             .catch(err => {
@@ -256,7 +257,7 @@ app.post("/bio", (req, res) => {
     if (req.body.bio) {
         db.updateBio(req.session.userId, req.body.bio)
             .then(data => {
-                console.log("DATA in BIO ROUTE", data);
+                //console.log("DATA in BIO ROUTE", data);
                 res.json(data.rows[0]);
             })
             .catch(err => {
@@ -266,7 +267,7 @@ app.post("/bio", (req, res) => {
                 });
             });
     } else {
-        console.log("ELSE IN BIO");
+        //console.log("ELSE IN BIO");
         res.json({
             success: false
         });
@@ -306,13 +307,13 @@ app.get("/get-initial-status/:id", (req, res) => {
         .then(data => {
             // console.log("accepted!!!!!!!!", data.rows[0]);
             if (!data.rows.length) {
-                console.log("data.rows.length == 0");
+                //console.log("data.rows.length == 0");
                 res.json({
                     buttonText: "send friend request"
                 });
             } else {
                 if (data.rows[0].accepted) {
-                    console.log("accepted", data.rows[0]);
+                    //console.log("accepted", data.rows[0]);
                     res.json({
                         buttonText: "unfriend"
                     });
@@ -376,7 +377,7 @@ app.post("/accepted-friendship-status/:id", (req, res) => {
 app.post("/send-friend-request-status/:id", (req, res) => {
     const otherUserId = req.params.id;
     const myId = req.session.userId;
-    console.log("action request", req.body);
+    //console.log("action request", req.body);
 
     //can either be friendship accepted
     db.sendFriendRequest(myId, otherUserId)
@@ -399,7 +400,7 @@ app.get("/friends-wannabees", (req, res) => {
     console.log("my id", myId);
     db.getFriendsAndWannabees(myId)
         .then(data => {
-            console.log("get friends and wannabees", data.rows);
+            //console.log("get friends and wannabees", data.rows);
             res.json(data.rows);
         })
         .catch(err => {
@@ -439,11 +440,75 @@ let onlineUsers = {};
 
 // WILL BE PASSED AN OBJECT THAT REPRESENTS THE CONNECTION
 io.on("connection", socket => {
+    // ------------ AI BEHAVIOUR --------------
+    socket.on("UserResponseToAI", data => {
+        //
+        console.log("happening one");
+        //console.log("data in UserResponseToAI", data);
+        // PUSH SPICEY RESPONSE TO STORE
+
+        var pick = "";
+
+        for (var i = 0; i < jsonBehaviour.length; i++) {
+            var obj = jsonBehaviour[i];
+            // console.log(obj.id);
+
+            //data == variations and keywords
+            // for (var i = 0; i < array.length; i++) {
+            //     array[i]
+            // }
+            //console.log("obj keyword", obj.keyword);
+            //console.log("obj variations", obj.variations);
+
+            // console.log("keyword returns ", obj.keyword);
+            //
+            // console.log("variations returns", obj.variations);
+            // console.log("user said ", data.response);
+
+            if (
+                obj.keyword == data.response ||
+                obj.variations.some(v => v == data.response)
+            ) {
+                //console.log("happening once");
+                //console.log("object responses!!!", obj.responses);
+
+                // IF ARRAY HAS MORE ELEMENTS
+                if (obj.responses.length != 1) {
+                    pick =
+                        obj.responses[
+                            Math.floor(Math.random() * obj.responses.length)
+                        ];
+
+                    //console.log("ARRAY HAS MORE ELEMENTS THAN 1 ", pick);
+                    console.log("emiting only once if array has more elements");
+                    socket.emit("getAIResponses", pick);
+                } else {
+                    //PRINT ONE
+                    //console.log("ARRAY HAS ONLY ONE ELEM ", pick);
+                    pick = obj.responses;
+                    socket.emit("getAIResponses", pick);
+
+                    // //socket.emit();
+                    // socket.emit("getAIResponses", pick);
+                }
+            }
+
+            //console.log("THE PICK", pick);
+        }
+
+        // if (data == "" || ) {
+        //
+        // }
+
+        // RENDER SPICEY RESPONSE
+        //synthVoice(data);
+    });
+
     const socketId = socket.id;
-    console.log("new connection :)", socketId); //will be useful for part 8
+    //console.log("new connection :)", socketId); //will be useful for part 8
 
     let userId = socket.request.session.userId;
-    console.log("MY USERID FOR SOCKET IO", userId);
+    //console.log("MY USERID FOR SOCKET IO", userId);
 
     // USER REQUIRE TO BE LOGGED IN
     if (!userId) {
@@ -454,12 +519,12 @@ io.on("connection", socket => {
     onlineUsers[socket.id] = userId;
 
     const valInOnlineUsers = Object.values(onlineUsers);
-    console.log("VALUES IN THE onlineUsers ARRAY", valInOnlineUsers);
+    //console.log("VALUES IN THE onlineUsers ARRAY", valInOnlineUsers);
 
     // WHEN USER CONNECTS -> SEND THEM THE FULL LIST OF ONLNE USERS
     db.getUsersByIds(valInOnlineUsers)
         .then(data => {
-            console.log("socket data getUsersById", data);
+            //console.log("socket data getUsersById", data);
             // socket.emit = ONLY FOR THE CURRENT USER
             socket.emit("onlineUsers", data.rows);
         })
@@ -474,9 +539,9 @@ io.on("connection", socket => {
         //GET JOINING USER
         db.getUserById(userId)
             .then(data => {
-                console.log(
-                    "DATA.ROWS AFTER GETTING USER BY ID FOR SOCKET EMITING BROADCASTING"
-                );
+                // console.log(
+                //     "DATA.ROWS AFTER GETTING USER BY ID FOR SOCKET EMITING BROADCASTING"
+                // );
                 // BROADCASTING EVERYBODY BESIDES THE USER FOR NOTIFYING
                 socket.broadcast.emit("userJoined", data.rows[0]);
             })
@@ -497,13 +562,13 @@ io.on("connection", socket => {
 
     // NEW MESSAGES
     socket.on("messageHasBeenSent", message => {
-        console.log("chatMessages", message);
-        console.log("userId: ", userId);
+        //console.log("chatMessages", message);
+        //console.log("userId: ", userId);
 
         // FIRST NEED TO GET THE USER INFOS
         db.getOtherUserById(userId)
             .then(data => {
-                console.log("DATA IN GET USER BY ID", data);
+                //console.log("DATA IN GET USER BY ID", data);
 
                 const messageObject = {
                     first: data.rows[0].first,
@@ -514,7 +579,7 @@ io.on("connection", socket => {
                     id: data.rows[0].id
                 };
 
-                console.log("THE MESSAGE!! test", messageObject);
+                //console.log("THE MESSAGE!! test", messageObject);
 
                 //one we have the object we wnt to make sure that everyone gets the obbject that is online
                 //console.log("data in ", data);
@@ -525,7 +590,7 @@ io.on("connection", socket => {
                 // INSERT MESSAGES TO THE QUERY
                 db.insertMessages(message, userId)
                     .then(data => {
-                        console.log("DATA IN INSERT MESSAGES", data);
+                        //console.log("DATA IN INSERT MESSAGES", data);
                     })
                     .catch(error => {
                         console.log("error in insertMessages SOCKET IO", error);
@@ -539,7 +604,7 @@ io.on("connection", socket => {
 
     db.getMessages()
         .then(data => {
-            console.log("DATA IN GET MESSAGES ", data.rows);
+            //console.log("DATA IN GET MESSAGES ", data.rows);
             // EMIT TO ALL
             io.sockets.emit("chatMessages", data.rows);
         })

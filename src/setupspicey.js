@@ -4,14 +4,14 @@ import { connect } from "react-redux";
 import { getSocket } from "./socket";
 import axios from "axios";
 import { getUserResponses } from "./actions";
-import { store } from "./start";
 
-export default class StartSpicey extends React.Component {
+class StartSpicey extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
 
         this.synthVoice = this.synthVoice.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentDidMount() {
@@ -46,9 +46,14 @@ export default class StartSpicey extends React.Component {
                 text = e.results[last][0].transcript;
                 console.log("text the user said", text);
 
-                store.dispatch(getUserResponses(text));
+                this.props.dispatch(getUserResponses(text));
 
                 console.log("Confidence: " + e.results[0][0].confidence);
+            };
+
+            recognition.onspeechstart = () => {
+                // SPEACH HAS BEEN DETECTED
+                console.log("SOMEBODY IS TALKING");
             };
 
             recognition.onspeechend = () => {
@@ -57,7 +62,7 @@ export default class StartSpicey extends React.Component {
 
             recognition.onerror = e => {
                 text = "Error occurred in recognition: " + e.error;
-                //store.dispatch(displayMostRecentUserComment(text));
+                //this.props.dispatch(displayMostRecentUserComment(text));
                 return;
             };
 
@@ -109,6 +114,7 @@ export default class StartSpicey extends React.Component {
     }
 
     render() {
+        console.log("this props", this.props);
         return (
             <div className="start-talking-to-spicey">
                 <p className="first">Hello, I am SPICEY!</p>
@@ -119,3 +125,23 @@ export default class StartSpicey extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => {
+    console.log("STATE : ", state);
+    return {
+        response: state.response
+
+        // // from MDN DOCUMENTATION:  word => word.length > 6
+        // friends:
+        //     state.friendsKey &&
+        //     state.friendsKey.filter(friend => friend.accepted === true),
+        //
+        // wannabees:
+        //     state.friendsKey &&
+        //     state.friendsKey.filter(wannabees => wannabees.accepted === false)
+        // // wannabes: , // use filter method  _> accepted: false
+        // // friends:
+    };
+};
+
+export default connect(mapStateToProps)(StartSpicey);
