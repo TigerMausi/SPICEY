@@ -24,6 +24,8 @@ export default class StartGame extends React.Component {
         console.log("we made it");
         //BIND LATER
         this.shuffleCards = this.shuffleCards.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.checkforMatch = this.checkforMatch.bind(this);
     }
 
     shuffleCards(array) {
@@ -72,10 +74,47 @@ export default class StartGame extends React.Component {
     }
 
     // START SPEECH RECOGNITION
-    handleClick() {
+    handleClick(e, card) {
         // recognition.onend = function() {
         //     recognition.start();
         // }
+        //
+        console.log("event", e);
+        //e.classList.toggle("active");
+        if (
+            !this.state.card1
+            // typeof this.state.card1 == "undefined" ||
+            // this.state.card1 == null
+        ) {
+            this.setState({
+                card1: card
+            });
+            //console.log(this.state);
+        } else {
+            this.setState({
+                card2: card
+            });
+
+            if (this.state.card1 == this.state.card2) {
+                console.log("match");
+
+                //
+                this.setState({
+                    card1: null,
+                    card2: null
+                });
+            }
+        }
+        console.log("card1", this.state.card1);
+        console.log("card2", this.state.card2);
+        //console.log("card", e);
+        //console.log("clicked", this.state.shuffledCards);
+    }
+
+    checkforMatch() {
+        // if (true) {
+        // }
+        console.log("calllled", this.state);
     }
 
     createField(size) {}
@@ -106,38 +145,22 @@ export default class StartGame extends React.Component {
             return null;
         }
 
-        console.log("this.state", this.state);
+        //console.log("this.state", this.state);
 
         return (
-            <div className="start">
-                <p className="first">Hello, I am SPICEY!</p>
-                <button className="reset" onClick={this.startGame}>
-                    start game
-                </button>
-
-                {this.state.shuffledCards.map(card => {
-                    //                     <div class="flip-card">
-                    //                     <div class="flip-card-inner">
-                    //     <div class="flip-card-front">
-                    //       <img src="img_avatar.png" alt="Avatar" style="width:300px;height:300px;">
-                    //     </div>
-                    //     <div class="flip-card-back">
-                    //       <h1>John Doe</h1>
-                    //       <p>Architect & Engineer</p>
-                    //       <p>We love that guy</p>
-                    //     </div>
-                    //   </div>
-                    // </div>
-
+            <div id="board">
+                {this.state.shuffledCards.map((card, index) => (
                     <div
-                        className="cards"
-                        width="100"
-                        height="100"
-                        onClick={this.turnAround}
+                        className="flip-card"
+                        key={index}
+                        onClick={e => this.handleClick(e, card)}
                     >
-                        {card}
-                    </div>;
-                })}
+                        <div className="flip-card-inner">
+                            <div className="flip-card-front" />
+                            <div className="flip-card-back">{card}</div>
+                        </div>
+                    </div>
+                ))}
             </div>
         );
     }
