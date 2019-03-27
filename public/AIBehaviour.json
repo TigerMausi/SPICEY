@@ -73,6 +73,9 @@
     {
         "keyword": "how are you",
         "variations": ["how are you?", "hello, how are you?"],
-        "responses": [" I am very hungry and you?"]
+        "responses": [
+            " I am always hungry like Lorena and you?",
+            "I am excited to talk to all Wintergreenies, and you?"
+        ]
     }
 ]

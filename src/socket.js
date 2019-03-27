@@ -41,7 +41,10 @@ export function getSocket(store) {
             // store.dispatch(getAIResponses(data));
 
             // RENDER SPICEY RESPONSE
-            synthVoice(data);
+            setTimeout(() => {
+                console.log("synth voice in set timeout socket.js", synthVoice);
+                synthVoice(data);
+            }, 100);
         });
 
         socket.on("UserResponseToAI", data => {
@@ -83,25 +86,41 @@ export function getSocket(store) {
 
 // CREATE SYNTHETIC VOICE FOR COMPUTER
 function synthVoice(text) {
-    // CREATE CONTEXT FOR SPEECH SYNTHESIS
     const synth = window.speechSynthesis;
+    console.log("synth", synth);
 
-    //SpeechSynthesis.getVoices()
-    //DEFINE THE ACCENT later
-
-    // CREATE NEW INSTANCE OF SpeechSynthesisUtterance
     const msg = new SpeechSynthesisUtterance();
 
     var voices = synth.getVoices();
+    console.log("voices", voices);
+
+    // setTimeout(() => {
+    //     var voices = synth.getVoices();
+    //     console.log("voices", voices);
+    // }, 200);
+
+    // for (let i = 0; i < voices.length; i++) {
+    //     if (voices[i].name === "Samantha") {
+    //         msg.voice = voices[i];
+    //     }
+    // }
+
+    msg.voice = voices[32];
 
     // DEFINE WHAT TEXT COMPUTER WILL BE SPEAKING
     msg.text = text;
 
     // CUSTOMIZE COMPUTER'S VOICE
-    msg.voiceURI = "Native";
+    //msg.voiceURI = "Native";
+    msg.lang = "en-US";
     msg.volume = 1;
     msg.rate = 1;
-    msg.lang = "en-GB";
 
-    synth.speak(msg);
+    speechSynthesis.speak(msg);
+    if (!voices.length) {
+        speechSynthesis.cancel();
+        setTimeout(() => {
+            this.synthVoice(text);
+        }, 100);
+    }
 }

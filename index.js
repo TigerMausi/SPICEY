@@ -495,6 +495,14 @@ io.on("connection", socket => {
 
             //console.log("THE PICK", pick);
         }
+        if (!pick) {
+            console.log("NOTHING FOUND AGAIN");
+            let answer = "Soorry, i didn't understand you, please repeat";
+
+            //array maybe so different answets
+
+            socket.emit("getAIResponses", answer);
+        }
 
         // if (data == "" || ) {
         //

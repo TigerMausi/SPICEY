@@ -15,9 +15,11 @@ class StartSpicey extends React.Component {
     }
 
     componentDidMount() {
-        this.synthVoice(
-            "Hello, I am spicy. If you want to talk to me click on the nice glowy button and let's start our conversation"
-        );
+        // let initialMessage =
+        //     "Hello wintergreenies, I am spicy. If you want to talk to me click on the nice glowy button and let's start our conversation. Please shut up, wintergreen!";
+        let talk = "JUST TALK";
+
+        this.synthVoice(initialMessage);
     }
 
     // START SPEECH RECOGNITION
@@ -46,6 +48,7 @@ class StartSpicey extends React.Component {
                 text = e.results[last][0].transcript;
                 console.log("text the user said", text);
 
+                // SEND IT TO SERVER
                 this.props.dispatch(getUserResponses(text));
 
                 console.log("Confidence: " + e.results[0][0].confidence);
@@ -54,6 +57,8 @@ class StartSpicey extends React.Component {
             recognition.onspeechstart = () => {
                 // SPEACH HAS BEEN DETECTED
                 console.log("SOMEBODY IS TALKING");
+
+                // DO I NEED LIKE A SOCKET EVENT THAT LISTENS WHEN THE MOZILLA PROPERTY HAS BEEN CALLED
             };
 
             recognition.onspeechend = () => {
@@ -62,6 +67,8 @@ class StartSpicey extends React.Component {
 
             recognition.onerror = e => {
                 text = "Error occurred in recognition: " + e.error;
+                // ??? testing for when the users text couldn't be comprehended?
+
                 //this.props.dispatch(displayMostRecentUserComment(text));
                 return;
             };
@@ -118,9 +125,9 @@ class StartSpicey extends React.Component {
         return (
             <div className="start-talking-to-spicey">
                 <p className="first">Hello, I am SPICEY!</p>
-                <button className="startSpicey" onClick={this.handleClick}>
+                <p className="startSpicey" onClick={this.handleClick}>
                     start talking to Spicey
-                </button>
+                </p>
             </div>
         );
     }

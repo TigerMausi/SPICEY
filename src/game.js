@@ -15,17 +15,82 @@ export default class StartGame extends React.Component {
             // SELECTED CARDS: will be an array of 2 from cards
             currSelectedCards: [],
 
+            //SELECTED BY INDEX
+            firstSelectedIndex: null,
+            secondSelectedIndex: null,
+
             // KEEPING TRACK OF GAMES VICTORY
             nrVictories: 0,
 
+            currScore: 0,
+
+            // KEEPS TRACK OF THE CARDS THAT WERE IN MOTION
+            animationOnClick: false,
+
             // GAME OVER?
-            startGame: false
+            startGame: false,
+            choice: [
+                "🐶",
+                "🦄",
+                "🐒",
+                "🦁",
+                "🦊",
+                "🐘",
+                "🐭",
+                "🐹",
+                "🐰",
+                "🐨",
+                "🐥",
+                "🐙",
+                "🐡",
+                "🦖",
+                "🐷"
+            ]
         };
         console.log("we made it");
+
         //BIND LATER
         this.shuffleCards = this.shuffleCards.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.checkforMatch = this.checkforMatch.bind(this);
+        this.startNewGame = this.startNewGame.bind(this);
+    }
+
+    startNewGame(index) {
+        console.log("START GAME HAPPENING");
+
+        this.setState({
+            shuffledCards: [],
+
+            // SELECTED CARDS: will be an array of 2 from cards
+            currSelectedCards: [],
+
+            firstSelectedIndex: null,
+            secondSelectedIndex: null,
+
+            // KEEPING TRACK OF GAMES VICTORY
+            nrVictories: 0,
+            newPairs: [],
+
+            currScore: 0,
+            animationOnClick: false,
+
+            // GAME OVER?
+            startGame: true
+        });
+
+        // MAKE A COPY OF THE NEW ARRAY
+
+        const newArrayOfCards = this.state.choice.concat(
+            this.state.choice.slice()
+        );
+
+        console.log("new array", newArrayOfCards);
+
+        //
+        this.setState({
+            shuffledCards: this.shuffleCards(newArrayOfCards)
+        });
     }
 
     shuffleCards(array) {
@@ -41,95 +106,93 @@ export default class StartGame extends React.Component {
         return array;
     }
 
-    // multiplyCards(cards,  ) {
-    //     //
-    // }
-
-    componentDidMount() {
-        // // 15 * 2  30 elements
-        const cards = [
-            "🐶",
-            "🦍",
-            "🐒",
-            "🦁",
-            "🦊",
-            "🐘",
-            "🐭",
-            "🐹",
-            "🐰",
-            "🐨",
-            "🐥",
-            "🐙",
-            "🐡",
-            "🦖",
-            "🦀"
-        ];
-
-        // MAKE A COPY OF THE NEW ARRAY
-        const newArrayOfCards = cards.concat(cards.slice());
-
-        this.setState({
-            shuffledCards: this.shuffleCards(newArrayOfCards)
-        });
-    }
-
     // START SPEECH RECOGNITION
-    handleClick(e, card) {
-        // recognition.onend = function() {
-        //     recognition.start();
-        // }
-        //
-        console.log("event", e);
-        //e.classList.toggle("active");
-        if (
-            !this.state.card1
-            // typeof this.state.card1 == "undefined" ||
-            // this.state.card1 == null
-        ) {
-            this.setState({
-                card1: card
-            });
-            //console.log(this.state);
-        } else {
-            this.setState({
-                card2: card
-            });
+    handleClick(card, index) {
+        // IF ALREADY CLICKED DO NOT FLIPP
+        if (this.state.animationOnClick) {
+            return;
+        }
 
-            if (this.state.card1 == this.state.card2) {
-                console.log("match");
+        // creating a new array and adding the curr selcted state
+        let selectedCard = this.state.currSelectedCards;
+        console.log("selected card", selectedCard);
 
-                //
-                this.setState({
-                    card1: null,
-                    card2: null
-                });
+        console.log("this state after clicked", this.state);
+
+        // CHECK IF THE CARD HAS ALREADY BEEN SELECTED disable option to flip
+        if (this.state.currSelectedCards.length === 1) {
+            if ((this.state.currSelectedCards[0].index = index)) {
+                return;
             }
         }
-        console.log("card1", this.state.card1);
-        console.log("card2", this.state.card2);
-        //console.log("card", e);
-        //console.log("clicked", this.state.shuffledCards);
+        // MAKE A NEW ARRAY AND PUSHH THE CURRENTLY SELECTED CARD IN THE NEW ARRAY
+        selectedCard.push({ card, index });
+        console.log("NEW ARRAY", selectedCard);
+
+        if (selectedCard.length === 1) {
+            this.setState({
+                currSelectedCards: selectedCard,
+                firstSelectedIndex: index
+            });
+        } else if (selectedCard.length === 2) {
+            //IF CLICKED ON THE SAME IMAGE NO ACTION TO HAPPEN
+            if (this.state.currSelectedCards[0].index == index) {
+                return;
+            }
+
+            setTimeout(() => {
+                // ADD PROPERTY OF 2ND SELECTED
+                this.setState({
+                    currSelectedCards: selectedCard,
+                    secondSelectedIndex: index,
+                    animationOnClick: true //
+                });
+            }, 2000);
+        }
+
+        this.checkforMatch();
     }
 
     checkforMatch() {
-        // if (true) {
-        // }
-        console.log("calllled", this.state);
-    }
+        // CHECK IF THERE ARE 2 CARDS
+        if (this.state.currSelectedCards.length === 2) {
+            if (
+                this.state.currSelectedCards[0].card ===
+                this.state.currSelectedCards[1].card
+            ) {
+                // IT'S A MATCH
+                setTimeout(() => {
+                    let updatedNewPairs = this.state.newPairs;
 
-    createField(size) {}
+                    // UPDATE THE ARRAY
+                    updatedNewPairs.push(
+                        this.state.currSelectedCards[0].index,
+                        this.state.currSelectedCards[1].index
+                    );
 
-    startGame() {}
+                    // UPDATE SCORE
+                    let score = this.state.currScore;
+                    score += 1;
 
-    createCards() {}
-
-    turnAround() {
-        this.addClass("active");
+                    // SETTING NEW STATE TO IGNORE THE PREVIOUS ONES THAT WERE ALREADY A MATCH?
+                    this.setState({
+                        newPairs: updatedNewPairs,
+                        animationOnClick: false
+                    });
+                    // CHECK IF ALL WERE A MATCH
+                    // if (true) {
+                    //
+                    // }
+                }, 1000);
+            }
+        }
     }
 
     // WHEN 2 CARDS MATCH
     winningBehaviour() {
         // WHEN 2 CARDS MATCH
+        // if (this.state.selectedCard) {
+        // }
     }
 
     // SETTING UP THE GAME FIELD
@@ -141,26 +204,60 @@ export default class StartGame extends React.Component {
     // CREATE SYNTHETIC VOICE FOR COMPUTER
 
     render() {
-        if (this.state.shuffledCards.length == 0) {
-            return null;
-        }
-
         //console.log("this.state", this.state);
 
+        // <div>
+        //     <button className="FriendButton">START GAME</button>
+        // </div>
+
+        console.log("STATE ", this.state);
+
         return (
-            <div id="board">
-                {this.state.shuffledCards.map((card, index) => (
-                    <div
-                        className="flip-card"
-                        key={index}
-                        onClick={e => this.handleClick(e, card)}
+            <div className="game-field">
+                <div>
+                    <button
+                        className={
+                            this.state.startGame
+                                ? "onStartMakeInvisible"
+                                : "FriendButton"
+                        }
+                        id="style-change"
+                        onClick={this.startNewGame}
                     >
-                        <div className="flip-card-inner">
-                            <div className="flip-card-front" />
-                            <div className="flip-card-back">{card}</div>
+                        START GAME
+                    </button>
+                </div>
+
+                <div id="board">
+                    {this.state.shuffledCards.map((card, index) => (
+                        <div
+                            className={
+                                this.state.newPairs.includes(index)
+                                    ? "flip-card hidePairs"
+                                    : "flip-card"
+                            }
+                            key={index}
+                            onClick={e => this.handleClick(card, index)}
+                        >
+                            <div
+                                className={
+                                    this.state.firstSelectedIndex === index ||
+                                    this.state.secondSelectedIndex === index
+                                        ? "flip-card-inner flipOnSelection"
+                                        : "flip-card-inner"
+                                }
+                            >
+                                <div className="flip-card-front">
+                                    <img
+                                        className="img-question-mark"
+                                        src="/images/question_mark2.gif"
+                                    />
+                                </div>
+                                <div className="flip-card-back">{card}</div>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         );
     }
