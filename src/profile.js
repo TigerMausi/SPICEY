@@ -20,16 +20,27 @@ export default class Profile extends React.Component {
         // </div>
         return (
             <div className="profile-container">
-                <Link to="/startSpicey">
-                    <button className="startSpicey" onClick={this.handleClick}>
-                        start Spicey
-                    </button>
-                </Link>
-                <Link to="/startGame">
-                    <button className="startGame" onClick={this.handleClick}>
-                        start Game
-                    </button>
-                </Link>
+                <div id="buttons-features">
+                    <Link to="/startSpicey">
+                        <button
+                            className="FriendButton"
+                            id="define"
+                            onClick={this.handleClick}
+                        >
+                            start Spicey
+                        </button>
+                    </Link>
+
+                    <Link to="/startGame">
+                        <button
+                            className="FriendButton"
+                            id="down"
+                            onClick={this.handleClick}
+                        >
+                            start Game
+                        </button>
+                    </Link>
+                </div>
 
                 <div className="image">
                     <ProfilePic

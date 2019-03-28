@@ -56,7 +56,7 @@ class Chat extends React.Component {
                     </div>
 
                     <div className="foreground">
-                        <h1>START WRITING TO ALL MARTIAN PEOPLE</h1>
+                        <h1>START SHARING YOUR STORY NOW WITH THE COMMUNITY</h1>
                         <div
                             ref={elem => (this.chatContainer = elem)}
                             id="chat-container"

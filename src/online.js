@@ -32,7 +32,12 @@ class Online extends React.Component {
                                     <br />
                                     {user.last}
                                 </div>
-                                <img src={image_2} height="80" width="80" />
+                                <img
+                                    src={image_2}
+                                    height="80"
+                                    width="80"
+                                    id="img-on-display"
+                                />
                             </div>
                         );
                     })}

@@ -1,81 +1,98 @@
 [
     {
-        "keyword": "",
-        "variations": [
-            " ",
-            " I don't want to talk ",
-            " I don't want to talk to you ",
-            " I don't care "
-        ],
+        "keyword": "I am",
+        "variations": ["my name is", "nice to meet you", "i am fine thank you"],
         "responses": [
-            " Why don't you want to talk to me? I am here to help you",
-            " Do you want to play a game instead of talking to me, I am sure it will be fun ",
-            " Did you said something or was it just silence? ",
-            " Hello, knock knock. Is anybody there?"
+            "Nice to meet you what plans do you have for today?",
+            "Nice to meet you how are you today?",
+            "Nice to meet you do you want to have some fun playing a game I prepared for you?"
         ]
     },
-
     {
-        "keyword": " I am ",
-        "variations": [" My name is ", " Nice to meet you", " I am "],
+        "keyword": "My name is",
+        "variations": ["My name is", "Nice to meet you"],
         "responses": [
-            " Nice to meet you, what plans do you have for today?",
-            " Nice to meet you, how are you today?",
-            " Nice to meet you, do you want to have some fun playing a game I prepared for you?"
+            "Nice to meet you what plans do you have for today?",
+            "Nice to meet you how are you today?",
+            "Nice to meet you do you want to have some fun playing a game I prepared for you?"
         ]
     },
-
     {
-        "keyword": "Yes",
-        "variations": [
-            " Yes, I want to play ",
-            " I would like to play ",
-            " sure "
-        ],
-        "responses": [" Then let's start our game", " Then let's play"]
+        "keyword": "yes",
+        "variations": ["yes I want to play", "I would like to play ", "sure"],
+        "responses": ["Then let's start our game", "Then let's play"]
     },
     {
         "keyword": "play",
-        "variations": [" Yes, I want to play ", " I would like to play "],
-        "responses": [" Then let's start our game", " Then let's play"]
+        "variations": ["Yes I want to play", " I would like to play"],
+        "responses": ["Then let us start our game", "Then let us play"]
+    },
+    {
+        "keyword": "start game",
+        "variations": ["start the game", " I want to play"],
+        "responses": [
+            "Okay I will start the game for you",
+            "I would be more than happy to start the game for you"
+        ]
     },
     {
         "keyword": "No",
         "variations": [
-            " No, I dont want to play ",
-            " I would rather not play ",
-            " I don't have time for that"
+            "No i do not want to play",
+            "I would rather not play ",
+            "I do not have time for that"
         ],
         "responses": [
-            " Okay, then what do you want to do next?",
-            " What would you rather do?"
+            "Okay, then what do you want to do next?",
+            "What would you rather do?"
         ]
     },
-
     {
         "keyword": "not sure",
-        "variations": ["I don't know", "I am not sure"],
+        "variations": ["I do not know", "I am not sure"],
         "responses": [
-            " Okay, then what would you rather do?",
-            " Do you have something in mind?"
+            "Okay, then what would you rather do?",
+            "Do you have something in mind?"
         ]
     },
     {
         "keyword": "hello",
-        "variations": ["Hello", "hi"],
-        "responses": [" Greetings", " Hello to you"]
+        "variations": ["hello", "hi", "hello spicey", "hello spicing"],
+        "responses": [
+            "Greetings, wintergreenies",
+            "Hello to you all, wintergreenies"
+        ]
     },
     {
         "keyword": "false",
         "variations": ["falsey", "false"],
-        "responses": [" What is false"]
+        "responses": [" What is false, do you mean no?"]
     },
     {
         "keyword": "how are you",
-        "variations": ["how are you?", "hello, how are you?"],
+        "variations": [
+            "how are you",
+            "hello how are you",
+            "how are you spicey",
+            "how are you spicing"
+        ],
         "responses": [
-            " I am always hungry like Lorena and you?",
-            "I am excited to talk to all Wintergreenies, and you?"
+            "I am excited to talk to all of you Wintergreenies, and you?"
+        ]
+    },
+    {
+        "keyword": "",
+        "variations": [
+            "",
+            "I do not want to talk",
+            "I do not want to talk to you",
+            "I do not care"
+        ],
+        "responses": [
+            "Why do you not want to talk to me? I am here to help you",
+            "Do you want to play a game instead of talking to me, I am sure it will be fun",
+            "Did you say something or was it just silence?",
+            "Hello, knock knock. Is anybody there?"
         ]
     }
 ]

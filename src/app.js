@@ -94,6 +94,10 @@ export default class App extends React.Component {
                         />
                     </div>
                     <div className="navigation-container">
+                        <a href="/" id="nav_0">
+                            Hello <br />
+                            {this.state.firstName}
+                        </a>
                         <a href="/getFriends" id="nav_1">
                             list of friends
                         </a>
@@ -112,14 +116,6 @@ export default class App extends React.Component {
                     </div>
 
                     <div className="content-container">
-                        <div className="prof-container">
-                            <div>Your Profile: </div>
-                            <br />
-                            {this.state.firstName}
-
-                            {this.state.lastName}
-                        </div>
-
                         {this.state.uploaderIsVisible && (
                             <Uploader
                                 hideUploader={this.hideUploader}

@@ -36,9 +36,24 @@ export function getSocket(store) {
         });
 
         socket.on("getAIResponses", data => {
-            console.log("data in AI RESPONSE!!!", data);
+            console.log("DATA IN SOCKET", data);
+            console.log("length of data!!!", data.length);
+
             // PUSH SPICEY RESPONE TO STORE
             // store.dispatch(getAIResponses(data));
+
+            console.log("IS IT length?", "Then let us start our game".length);
+            console.log("IS IT length?", "Then let us play".length);
+
+            if (
+                data == "Then let us start our game" ||
+                data == "Then let us play" ||
+                data == "Okay I will start the game for you" ||
+                data == "I would be more than happy to start the game for you"
+            ) {
+                location.replace("/startGame");
+                synthVoice(data);
+            }
 
             // RENDER SPICEY RESPONSE
             setTimeout(() => {
@@ -49,8 +64,10 @@ export function getSocket(store) {
 
         socket.on("UserResponseToAI", data => {
             console.log("data in UserResponseToAI", data);
-            // PUSH SPICEY RESPONE TO STORE
+            // // PUSH SPICEY RESPONE TO STORE
             store.dispatch(getUserResponses(data));
+
+            console.log(data);
 
             // RENDER SPICEY RESPONSE
             synthVoice(data);

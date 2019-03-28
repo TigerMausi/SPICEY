@@ -45,17 +45,6 @@ class Friends extends React.Component {
                                         {friends.last}
                                     </div>
                                     <img src={image_2} height="80" width="80" />
-                                    <button
-                                        className="FriendButton"
-                                        id="style-change"
-                                        onClick={() =>
-                                            this.props.dispatch(
-                                                deleteFriend(friends.id)
-                                            )
-                                        }
-                                    >
-                                        UNFRIEND
-                                    </button>
                                 </div>
                             );
                         })}

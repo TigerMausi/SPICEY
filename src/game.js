@@ -45,7 +45,9 @@ export default class StartGame extends React.Component {
                 "🐡",
                 "🦖",
                 "🐷"
-            ]
+            ],
+
+            winningMessage: ""
         };
         console.log("we made it");
 
@@ -54,6 +56,7 @@ export default class StartGame extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.checkforMatch = this.checkforMatch.bind(this);
         this.startNewGame = this.startNewGame.bind(this);
+        //this.score = this.score.bind(this);
     }
 
     startNewGame(index) {
@@ -64,6 +67,7 @@ export default class StartGame extends React.Component {
 
             // SELECTED CARDS: will be an array of 2 from cards
             currSelectedCards: [],
+            copyCurrentCards: [],
 
             firstSelectedIndex: null,
             secondSelectedIndex: null,
@@ -80,7 +84,6 @@ export default class StartGame extends React.Component {
         });
 
         // MAKE A COPY OF THE NEW ARRAY
-
         const newArrayOfCards = this.state.choice.concat(
             this.state.choice.slice()
         );
@@ -96,7 +99,6 @@ export default class StartGame extends React.Component {
     shuffleCards(array) {
         // TO BE STARTED AT THE VERY BEGINNING IN componentDidMount()
         // FROM THE INTERNET
-
         for (var i = array.length - 1; i > 0; i--) {
             var j = Math.floor(Math.random() * (i + 1));
             var temp = array[i];
@@ -108,6 +110,8 @@ export default class StartGame extends React.Component {
 
     // START SPEECH RECOGNITION
     handleClick(card, index) {
+        console.log("index!!", index);
+        console.log("caaard!!!", card);
         // IF ALREADY CLICKED DO NOT FLIPP
         if (this.state.animationOnClick) {
             return;
@@ -117,16 +121,18 @@ export default class StartGame extends React.Component {
         let selectedCard = this.state.currSelectedCards;
         console.log("selected card", selectedCard);
 
-        console.log("this state after clicked", this.state);
-
         // CHECK IF THE CARD HAS ALREADY BEEN SELECTED disable option to flip
-        if (this.state.currSelectedCards.length === 1) {
-            if ((this.state.currSelectedCards[0].index = index)) {
+        if (
+            this.state.currSelectedCards.length === 1 ||
+            this.state.currSelectedCards.length === 2
+        ) {
+            if (this.state.currSelectedCards[0].index === index) {
                 return;
             }
         }
         // MAKE A NEW ARRAY AND PUSHH THE CURRENTLY SELECTED CARD IN THE NEW ARRAY
         selectedCard.push({ card, index });
+        console.log("this state after clicked", this.state);
         console.log("NEW ARRAY", selectedCard);
 
         if (selectedCard.length === 1) {
@@ -140,59 +146,88 @@ export default class StartGame extends React.Component {
                 return;
             }
 
+            this.setState({
+                currSelectedCards: selectedCard,
+                secondSelectedIndex: index,
+                animationOnClick: true
+            });
+
+            this.checkforMatch();
+
             setTimeout(() => {
                 // ADD PROPERTY OF 2ND SELECTED
                 this.setState({
-                    currSelectedCards: selectedCard,
-                    secondSelectedIndex: index,
-                    animationOnClick: true //
+                    currSelectedCards: [],
+                    firstSelectedIndex: null,
+                    secondSelectedIndex: null,
+                    animationOnClick: false //
                 });
-            }, 2000);
+            }, 1000);
         }
-
-        this.checkforMatch();
     }
 
     checkforMatch() {
-        // CHECK IF THERE ARE 2 CARDS
-        if (this.state.currSelectedCards.length === 2) {
-            if (
-                this.state.currSelectedCards[0].card ===
+        // console.log("this.state in checkforMatch", this.state);
+        // // CHECK IF THERE ARE 2 CARDS
+        // console.log(
+        //     "!!!current selected card is",
+        //     this.state.currSelectedCards
+        // );
+        console.log(
+            "do they match? answer:",
+            this.state.currSelectedCards[0].card ===
                 this.state.currSelectedCards[1].card
-            ) {
-                // IT'S A MATCH
-                setTimeout(() => {
-                    let updatedNewPairs = this.state.newPairs;
+        );
 
-                    // UPDATE THE ARRAY
-                    updatedNewPairs.push(
-                        this.state.currSelectedCards[0].index,
-                        this.state.currSelectedCards[1].index
-                    );
+        // COMPARING THE 2 CARDS THAT WERE CURRENTLY SELECTED
+        if (
+            this.state.currSelectedCards[0].card ===
+            this.state.currSelectedCards[1].card
+        ) {
+            //MOTION
+            this.setState({
+                animationOnClick: true
+            });
+            console.log("animation on click is set to: ", this.state);
 
-                    // UPDATE SCORE
-                    let score = this.state.currScore;
-                    score += 1;
+            // IT'S A MATCH
+            setTimeout(() => {
+                let updatedNewPairs = this.state.newPairs;
 
-                    // SETTING NEW STATE TO IGNORE THE PREVIOUS ONES THAT WERE ALREADY A MATCH?
+                // UPDATE THE ARRAY
+                updatedNewPairs.push(
+                    this.state.currSelectedCards[0].index,
+                    this.state.currSelectedCards[1].index
+                );
+
+                // UPDATE SCORE
+                let score = this.state.currScore;
+                score += 1;
+
+                // SETTING NEW STATE TO IGNORE THE PREVIOUS ONES THAT WERE ALREADY A MATCH?
+                this.setState({
+                    newPairs: updatedNewPairs,
+                    animationOnClick: false,
+                    currScore: score
+                });
+
+                console.log("UPDATED SCORE ", score);
+
+                // const maxScore = 15;
+                const maxScore = this.state.shuffledCards.length / 2;
+                console.log(maxScore);
+
+                // CHECK IF ALL WERE A MATCH
+                if (score === maxScore) {
+                    updatedNewPairs = [];
+
                     this.setState({
-                        newPairs: updatedNewPairs,
-                        animationOnClick: false
+                        startGame: false,
+                        winningMessage: "CONGRATS! YOU WON :) "
                     });
-                    // CHECK IF ALL WERE A MATCH
-                    // if (true) {
-                    //
-                    // }
-                }, 1000);
-            }
+                }
+            }, 1000);
         }
-    }
-
-    // WHEN 2 CARDS MATCH
-    winningBehaviour() {
-        // WHEN 2 CARDS MATCH
-        // if (this.state.selectedCard) {
-        // }
     }
 
     // SETTING UP THE GAME FIELD
@@ -210,10 +245,12 @@ export default class StartGame extends React.Component {
         //     <button className="FriendButton">START GAME</button>
         // </div>
 
-        console.log("STATE ", this.state);
+        console.log("STATE for checking if fliponSelection ", this.state);
+        console.log("this.score", this.state.currScore);
 
         return (
             <div className="game-field">
+                <h2>{this.state.currScore}</h2>
                 <div>
                     <button
                         className={
@@ -226,6 +263,7 @@ export default class StartGame extends React.Component {
                     >
                         START GAME
                     </button>
+                    <div>{this.state.winningMessage}</div>
                 </div>
 
                 <div id="board">

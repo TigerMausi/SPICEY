@@ -11,13 +11,15 @@
 #board {
     width: 80%;
     padding: 5%;
-    margin: 5%;
+    /* padding-left: 3%; */
+    margin: 2.5% 5%;
     border-radius: 3%;
     border-color: 4px solid green;
-    background-color: green;
+    /* background-color: green; */
     background: url(./images/jungle_1.jpg);
     object-fit: contain;
     /* border: 5px solid green; */
+    height: 700px;
 }
 
 .flip-card {
@@ -33,6 +35,26 @@
     box-shadow: inset 0 0px 10px #000000;
 
     border: 3px solid white;
+}
+
+.buttons-features {
+    width: 200px;
+    height: 100px;
+    position: absolute;
+    /* margin-left: 400px; */
+    margin-top: 500px;
+    margin-left: 1020px;
+}
+#define {
+    position: absolute;
+    margin-top: 500px;
+    margin-left: 1120px;
+}
+
+#down {
+    margin-top: 30px;
+    width: 200px;
+    /* text-decoration: none; */
 }
 
 /* This container is needed to position the front and back side */
@@ -100,7 +122,7 @@
 
 /* Style the back side */
 .flip-card-back {
-    background-color: #fdd692;
+    background-color: darkseagreen;
     color: white;
     transform: rotateY(180deg);
     /* line-height: 100%; */
@@ -180,7 +202,7 @@
 /*  GAME CSS ENDS HERE     */
 
 body {
-    background-color: #3f9db4;
+    background-color: #c4fdfd;
 }
 
 .startGame {
@@ -283,7 +305,7 @@ h3 {
     padding: 15px; */
     margin: 15px 100px;
     padding-top: 15px;
-    color: #efffe9;
+    color: black;
     text-align: center;
 }
 
@@ -308,7 +330,7 @@ h2 {
 /* REGISTRATION FORM */
 form {
     text-align: center;
-    background-color: #72bfce;
+    background-color: #3f9db4;
     color: tomato;
     margin-top: 80px;
     margin-bottom: 50px;
@@ -426,6 +448,8 @@ input {
     right: 40%;
     width: 380px;
     height: auto;
+    border-radius: 20&;
+    border-radius: 65%;
 }
 
 span {
@@ -689,8 +713,8 @@ height: 180px;
 }
 
 .FriendButton:active {
-    position: relative;
-    top: 1px;
+    /* position: relative;
+    top: 1px; */
 }
 
 .FriendButton {
@@ -922,6 +946,7 @@ div {
 
 #display-button {
     width: 180px;
+    margin-top: 150px;
 }
 
 .friends-wannabees-container {
@@ -934,19 +959,28 @@ div {
     /* display: inline-block; */
     /* flex-direction: column; */
     justify-content: center;
+    margin-top: 80px;
 }
 .wannabees-container {
     /* display: inline-block; */
     justify-content: center;
+    margin-top: 80px;
 }
 
 #style-change {
-    margin-top: 10px;
-    margin-bottom: 20px;
+    /* margin-top: 50px; */
+    /* margin-top: 50px; */
+    /* margin-right: auto; */
+    position: absolute;
+    /* display: flex; */
+    /* justify-content: center; */
+    left: 45%;
+    bottom: 40%;
+    font-size: -webkit-xxx-large;
 }
 
 .friends-list {
-    margin-top: 30px;
+    margin-top: 80px;
 }
 
 .friends-names {
@@ -979,6 +1013,14 @@ div {
     z-index: -1000;
     overflow: hidden;
     overflow-y: scroll;
+}
+
+#img-on-display {
+    border-radius: 50%;
+}
+
+.online-users-container {
+    margin-top: 100px;
 }
 
 .video {
@@ -1038,7 +1080,7 @@ video {
 
 /* EDITOR CONTAINER BIO */
 .bio-text-container {
-    margin-top: 370px;
+    margin-top: 150px;
 }
 
 .navigation-container {
@@ -1084,27 +1126,39 @@ li {
 }
 
 #nav_1 {
-    top: 10px;
-    left: 600px;
-    width: 140px;
+    top: -20px;
+    left: 800px;
+    width: 180px;
     font-size: 20px;
 }
 
 #nav_2 {
-    top: 10px;
-    left: 450px;
+    top: -20px;
+    left: 650px;
     font-size: 20px;
 }
 
 #nav_3 {
-    top: 10px;
+    top: -20px;
     font-size: 20px;
-    left: 150px;
+    left: 350px;
     width: 200px;
 }
 #nav_4 {
-    top: 10px;
+    top: -20px;
     font-size: 20px;
+    /* right: -120px; */
+    left: 150px;
+}
+#nav_0 {
+    right: 0;
+    width: 100px;
+    top: -45px;
+    left: 1200px;
+    font-size: 30px;
+    /* text-align: center; */
+    /* align-content: center; */
+    color: #3f9db4;
 }
 
 /*FROM PETE */

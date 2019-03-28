@@ -442,7 +442,7 @@ let onlineUsers = {};
 io.on("connection", socket => {
     // ------------ AI BEHAVIOUR --------------
     socket.on("UserResponseToAI", data => {
-        //
+        data.response = data.response.toLowerCase();
         console.log("happening one");
         //console.log("data in UserResponseToAI", data);
         // PUSH SPICEY RESPONSE TO STORE
@@ -451,27 +451,18 @@ io.on("connection", socket => {
 
         for (var i = 0; i < jsonBehaviour.length; i++) {
             var obj = jsonBehaviour[i];
-            // console.log(obj.id);
+            obj.keyword = obj.keyword.toLowerCase();
 
-            //data == variations and keywords
-            // for (var i = 0; i < array.length; i++) {
-            //     array[i]
-            // }
-            //console.log("obj keyword", obj.keyword);
-            //console.log("obj variations", obj.variations);
-
-            // console.log("keyword returns ", obj.keyword);
-            //
-            // console.log("variations returns", obj.variations);
-            // console.log("user said ", data.response);
+            console.log("obj.keyword", obj.keyword);
+            console.log("obj.variations", obj.variations);
+            console.log("USER SAID only data", data);
+            console.log(data.response.indexOf(obj.keyword) > -1);
 
             if (
                 obj.keyword == data.response ||
-                obj.variations.some(v => v == data.response)
+                data.response.indexOf("i am") > -1 ||
+                obj.variations.some(v => v.toLowerCase() == data.response)
             ) {
-                //console.log("happening once");
-                //console.log("object responses!!!", obj.responses);
-
                 // IF ARRAY HAS MORE ELEMENTS
                 if (obj.responses.length != 1) {
                     pick =
@@ -482,12 +473,13 @@ io.on("connection", socket => {
                     //console.log("ARRAY HAS MORE ELEMENTS THAN 1 ", pick);
                     console.log("emiting only once if array has more elements");
                     socket.emit("getAIResponses", pick);
+                    return;
                 } else {
                     //PRINT ONE
                     //console.log("ARRAY HAS ONLY ONE ELEM ", pick);
                     pick = obj.responses;
                     socket.emit("getAIResponses", pick);
-
+                    return;
                     // //socket.emit();
                     // socket.emit("getAIResponses", pick);
                 }
@@ -496,12 +488,32 @@ io.on("connection", socket => {
             //console.log("THE PICK", pick);
         }
         if (!pick) {
-            console.log("NOTHING FOUND AGAIN");
-            let answer = "Soorry, i didn't understand you, please repeat";
+            let pickNoComprehension = [
+                "Sorry, i do not understand you, can you please repeat?",
+                "I do not think I can do much magic, Do you want to play a game instead?",
+                "What a shame, I can not understand everything yet"
+            ];
+
+            console.log("heeere", pickNoComprehension);
+            let n = Math.floor(Math.random() * pickNoComprehension.length);
+            console.log("number", n);
+
+            //pickNoComprehension[n]
+            //
+            // for (var i = 0; i < pickNoComprehension.length; i++) {
+            //     pick = pickNoComprehension[i];
+            //     pick[Math.floor(Math.random() * pickNoComprehension.length)];
+            //
+            //     console.log("PICK GIVES ME", pick);
+            // }
+            // console.log("PICK GIVES ME", pick);
+            // obj.responses[
+            //     Math.floor(Math.random() * obj.responses.length)
+            // ];
 
             //array maybe so different answets
 
-            socket.emit("getAIResponses", answer);
+            socket.emit("getAIResponses", pickNoComprehension[n]);
         }
 
         // if (data == "" || ) {
