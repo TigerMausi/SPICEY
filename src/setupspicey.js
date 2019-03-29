@@ -16,7 +16,7 @@ class StartSpicey extends React.Component {
 
     componentDidMount() {
         let initialMessage =
-            "Hello wintergreenies, I am spicy. If you want to talk to me click on the nice glowy button and let's start our conversation. Please shut up, wintergreen!";
+            "Hello wintergreenies, I am spicy. If you want to talk to me click on the nice glowy button and let us start our conversation. I will kindly ask from you first to be quiet";
         //let initialMessage = "JUST TALK";
 
         this.synthVoice(initialMessage);

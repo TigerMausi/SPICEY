@@ -8,6 +8,13 @@
             "Nice to meet you do you want to have some fun playing a game I prepared for you?"
         ]
     },
+
+    {
+        "keyword": "drunk",
+        "variations": ["I want to get drunk"],
+        "responses": ["Can I join?", "Cool. That sounds like fun"]
+    },
+
     {
         "keyword": "My name is",
         "variations": ["My name is", "Nice to meet you"],

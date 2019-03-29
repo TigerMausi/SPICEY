@@ -6,13 +6,27 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    font-family: "Luckiest Guy", sans-serif;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+canvas {
+    display: block;
+    width: 10%;
+    height: 10%;
+    position: absolute;
+    z-index: -10;
+    width: 2500px;
+    height: 1050px;
 }
 
 #board {
     width: 80%;
-    padding: 5%;
+    padding: 2% 5%;
     /* padding-left: 3%; */
-    margin: 2.5% 5%;
+    margin: 0 5% 5% 5%;
     border-radius: 3%;
     border-color: 4px solid green;
     /* background-color: green; */
@@ -47,14 +61,80 @@
 }
 #define {
     position: absolute;
-    margin-top: 500px;
-    margin-left: 1120px;
+    margin-top: 530px;
+    margin-left: 1115px;
+    width: 120px;
+    z-index: 500;
+    /* text-decoration: none; */
+    background: linear-gradient(to bottom, #3f9db4 5%, #3f9db4 100%);
+    z-index: 200;
+    /* padding-bottom: 15px; */
+    padding-top: 16.555px;
+    font-size: large;
+    text-shadow: 1px 1px black;
+    letter-spacing: 1px;
+    border: 1px solid black;
+    opacity: none;
+}
+
+#define:hover {
+    background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0.05, #408c99),
+        color-stop(1, #599bb3)
+    );
+    background: -moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background: -webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background: -o-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background: -ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    /* background: linear-gradient(to bottom, #ff851b 5%, #ff851b 100%); */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
+    background-color: #408c99;
+    z-index: 500;
+    opacity: none;
 }
 
 #down {
-    margin-top: 30px;
-    width: 200px;
+    margin-top: 450px;
+    margin-left: 1115px;
+    width: 120px;
     /* text-decoration: none; */
+    background: linear-gradient(to bottom, #3f9db4 5%, #3f9db4 100%);
+    z-index: 200;
+    /* padding-bottom: 15px; */
+    padding-top: 16.555px;
+    font-size: large;
+    text-shadow: 1px 1px black;
+    letter-spacing: 1px;
+    border: 1px solid black;
+}
+
+#down:hover {
+    z-index: 500;
+    background: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0.05, #408c99),
+        color-stop(1, #599bb3)
+    );
+    background: -moz-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background: -webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background: -o-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    background: -ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
+    /* background: linear-gradient(to bottom, #ff851b 5%, #ff851b 100%); */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
+    background-color: #408c99;
+}
+
+#buttons-features a {
+    z-index: 500;
+    /* animation: none; */
+    /* transition: none; */
+    position: none;
+    transform: none;
 }
 
 /* This container is needed to position the front and back side */
@@ -86,6 +166,7 @@
 
 .flip-card-front:hover {
     box-shadow: 0px 12px 25px rgb(0, 0, 0);
+
     /* border: 2px solid #fff; */
     /* transform: scale(0.9); */
     /*border: 3px solid rgba(81, 203, 238, 1); */
@@ -203,6 +284,9 @@
 
 body {
     background-color: #c4fdfd;
+    background-image: url(/images/background_5.jpg);
+    background-color: black;
+    height: 1055px;
 }
 
 .startGame {
@@ -303,10 +387,15 @@ h3 {
     letter-spacing: 1.2px;
     word-spacing: 1.2px;
     padding: 15px; */
-    margin: 15px 100px;
-    padding-top: 15px;
-    color: black;
+    margin: 20px 100px;
+    padding-top: 20px;
+    color: #282828;
+    font-size: 35px;
+    font-weight: bolder;
+    text-shadow: 2px 4px black;
+
     text-align: center;
+    letter-spacing: 2px;
 }
 
 div.Typist {
@@ -330,16 +419,16 @@ h2 {
 /* REGISTRATION FORM */
 form {
     text-align: center;
-    background-color: #3f9db4;
+    background-color: #282828;
     color: tomato;
     margin-top: 80px;
     margin-bottom: 50px;
     margin-left: 0px;
-    border-top: 2px solid white;
-    border-bottom: 2px solid white;
+    border-top: 2px dashed grey;
+    border-bottom: 2px dashed grey;
     box-shadow: 10px solid white;
     padding: 20px 0;
-    border-radius: 3%;
+    border-radius: 36px;
     display: flex;
     align-items: center;
     /* box-shadow: 10px 10px; */
@@ -394,6 +483,7 @@ input {
 
 .content-container {
     text-align: center;
+    height: 790px;
 }
 
 /* FOR THE BIO EDITING */
@@ -462,12 +552,15 @@ span {
     -webkit-text-fill-color: rgba(255, 255, 255, 0); */
     /* margin: 15px; */
     padding-top: 17px;
-    color: #e33b3b;
+    color: #tomato;
+    text-shadow: 2px 2px white;
+    letter-spacing: 1px;
+
     /* animation: blink 10s linear infinite; */
 }
 
 a > span {
-    animation: blink 4s linear infinite;
+    animation: blink 2s linear infinite;
 }
 
 a:hover {
@@ -671,7 +764,7 @@ height: 180px;
 /* FRIEND BUTTON */
 /* DESIGN AND REFACTORING WIP */
 .FriendButton {
-    -moz-box-shadow: inset 0px 13px 39px -6px #11bed9;
+    /* -moz-box-shadow: inset 0px 13px 39px -6px #11bed9;
     /* -webkit-box-shadow: inset 0px 13px 39px -6px #11bed9; */
     /* box-shadow: inset 0px 13px 39px -6px #11bed9; */
     /* background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #599bb3), color-stop(1, #408c99) ); */
@@ -692,8 +785,9 @@ height: 180px;
     padding: 28px 30px;
     text-decoration: none;
     border-radius: 12px;
-    /* text-shadow: 0px 2px 0px #58cccc; */
+    text-shadow: 0px 2px 0px #58cccc;
     position: inherit;
+    z-index: 500;
 }
 .FriendButton:hover {
     background: -webkit-gradient(
@@ -707,9 +801,10 @@ height: 180px;
     background: -webkit-linear-gradient(top, #408c99 5%, #599bb3 100%);
     background: -o-linear-gradient(top, #408c99 5%, #599bb3 100%);
     background: -ms-linear-gradient(top, #408c99 5%, #599bb3 100%);
-    background: linear-gradient(to bottom, #ff851b 5%, #ff851b 100%);
+    /* background: linear-gradient(to bottom, #ff851b 5%, #ff851b 100%); */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#408c99', endColorstr='#599bb3',GradientType=0);
     background-color: #408c99;
+    z-index: 500;
 }
 
 .FriendButton:active {
@@ -731,9 +826,20 @@ height: 180px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 40px;
+    z-index: 200;
+    height: 75px;
     /* width: auto; */
     /* height: 10px; */
     /* display: block; */
+    /* text-decoration: none; */
+    background: linear-gradient(to bottom, #3f9db4 5%, #3f9db4 100%);
+    z-index: 200;
+    /* padding-bottom: 15px; */
+    padding-top: 16.555px;
+    font-size: 20px;
+    text-shadow: 1px 1px black;
+    letter-spacing: 1px;
+    border: 1px solid black;
 }
 
 /* BIO EDITING BUTTON */
@@ -784,7 +890,7 @@ height: 180px;
 /* FOR THE BUTTONS IN REGISTER & LOGIN */
 #submit {
     border: none;
-    background: #011627;
+    background: #3f9db4;
     color: #efffe9;
     cursor: pointer;
     margin: 15px 30px;
@@ -868,7 +974,7 @@ textarea {
     background-color: inherit;
     margin-top: 50px;
     /* border: 2px solid white; */
-    color: white;
+    color: #3f9db4;
     font-size: 20px;
     padding: 20px;
     letter-spacing: 1px;
@@ -915,16 +1021,17 @@ textarea {
 .bioEditor-container {
     width: 770px;
     height: 600px;
-    margin-top: 210px;
+    margin-top: 180px;
     margin-right: 10%;
     background-repeat: unset;
     background-size: contain;
     border: o.1px solid black;
     box-shadow: 5px solid green;
-    background-color: #3f9db4;
+    background-color: rgba(240, 255, 255, 0.6);
+    /* opacity: 0.8; */
+    z-index: 1;
     /* background: aqua; */
     border-radius: 10px;
-    box-shadow: 0px 1px 40px 10px black;
 }
 
 div {
@@ -946,7 +1053,8 @@ div {
 
 #display-button {
     width: 180px;
-    margin-top: 150px;
+    height: 20px;
+    margin-top: 100px;
 }
 
 .friends-wannabees-container {
@@ -1127,38 +1235,40 @@ li {
 
 #nav_1 {
     top: -20px;
-    left: 800px;
+    left: 700px;
     width: 180px;
     font-size: 20px;
 }
 
 #nav_2 {
     top: -20px;
-    left: 650px;
+    left: 600px;
     font-size: 20px;
 }
 
 #nav_3 {
     top: -20px;
     font-size: 20px;
-    left: 350px;
+    left: 330px;
     width: 200px;
 }
 #nav_4 {
     top: -20px;
     font-size: 20px;
     /* right: -120px; */
-    left: 150px;
+    left: 170px;
 }
 #nav_0 {
     right: 0;
     width: 100px;
     top: -45px;
-    left: 1200px;
+    left: 975px;
     font-size: 30px;
     /* text-align: center; */
     /* align-content: center; */
     color: #3f9db4;
+    text-shadow: 2px solid black;
+    text-shadow: 2px 2px black;
 }
 
 /*FROM PETE */

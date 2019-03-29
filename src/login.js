@@ -18,6 +18,56 @@ export default class Login extends React.Component {
             [e.target.name]: e.target.value
         }); //check state?
     }
+
+    componentDidMount() {
+        //new TypeIt(this.el, this.props);
+
+        this.synthVoice("Login to your account and start your journey now!");
+    }
+
+    synthVoice(text) {
+        // CREATE CONTEXT FOR SPEECH SYNTHESIS
+        const synth = window.speechSynthesis;
+        //console.log("synth", synth);
+
+        const msg = new SpeechSynthesisUtterance();
+
+        var voices = synth.getVoices();
+        //console.log("voices", voices);
+
+        // setTimeout(() => {
+        //     var voices = synth.getVoices();
+        //     console.log("voices", voices);
+        // }, 200);
+
+        // for (let i = 0; i < voices.length; i++) {
+        //     if (voices[i].name === "Samantha") {
+        //         msg.voice = voices[i];
+        //     }
+        // }
+
+        msg.voice = voices[32];
+
+        // DEFINE WHAT TEXT COMPUTER WILL BE SPEAKING
+        msg.text = text;
+
+        // CUSTOMIZE COMPUTER'S VOICE
+        //msg.voiceURI = "Native";
+        msg.lang = "en-US";
+        msg.volume = 1;
+
+        console.log("msg is ", msg);
+        msg.rate = 1;
+
+        speechSynthesis.speak(msg);
+        if (!voices.length) {
+            speechSynthesis.cancel();
+            setTimeout(() => {
+                this.synthVoice(text);
+            }, 100);
+        }
+    }
+
     handleSubmit(e) {
         console.log("SUBMIT in register, ");
         console.log("THIS.STAtE", this.state);

@@ -9,6 +9,7 @@ export default class Registration extends React.Component {
         this.state = {};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.synthVoice = this.synthVoice.bind(this);
     }
     //DOM - INPUT FIELDS will handle the change of information (STORE THE VAL IN A STATE)
     handleChange(e) {
@@ -19,7 +20,62 @@ export default class Registration extends React.Component {
     }
 
     componentDidMount() {
-        new TypeIt(this.el, this.props);
+        //new TypeIt(this.el, this.props);
+
+        this.synthVoice(`
+
+            A virtual assistant that talks to your child...
+
+            For children who have difficulties communicating, SPICEY
+            can be an an effective helper
+
+            to interact in a safe
+            environment and to train their thinking.
+
+            `);
+    }
+
+    synthVoice(text) {
+        // CREATE CONTEXT FOR SPEECH SYNTHESIS
+        const synth = window.speechSynthesis;
+        //console.log("synth", synth);
+
+        const msg = new SpeechSynthesisUtterance();
+
+        var voices = synth.getVoices();
+        //console.log("voices", voices);
+
+        // setTimeout(() => {
+        //     var voices = synth.getVoices();
+        //     console.log("voices", voices);
+        // }, 200);
+
+        // for (let i = 0; i < voices.length; i++) {
+        //     if (voices[i].name === "Samantha") {
+        //         msg.voice = voices[i];
+        //     }
+        // }
+
+        msg.voice = voices[32];
+
+        // DEFINE WHAT TEXT COMPUTER WILL BE SPEAKING
+        msg.text = text;
+
+        // CUSTOMIZE COMPUTER'S VOICE
+        //msg.voiceURI = "Native";
+        msg.lang = "en-US";
+        msg.volume = 1;
+
+        console.log("msg is ", msg);
+        msg.rate = 1;
+
+        speechSynthesis.speak(msg);
+        if (!voices.length) {
+            speechSynthesis.cancel();
+            setTimeout(() => {
+                this.synthVoice(text);
+            }, 100);
+        }
     }
 
     handleSubmit(e) {
@@ -88,15 +144,15 @@ export default class Registration extends React.Component {
                             Delay
                             ms={1250}
                         />
-                        For children who have difficulties communicating, <br />
-                        <span>SPICEY</span> <br />
-                        can be an an effective helper to interact in a safe
-                        environment and to train their thinking.
                     </h1>
-                    <Typist.Backspace count={149} delay={700} />
-                    <Typist.Backspace delay={3900} Delay ms={1250} />
                     <h1>
                         <span>Start your journey now!</span>
+                        <Typist.Backspace
+                            count={23}
+                            delay={1900}
+                            Delay
+                            ms={1650}
+                        />
                     </h1>
                 </Typist>
                 <form>
