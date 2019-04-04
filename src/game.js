@@ -250,7 +250,15 @@ export default class StartGame extends React.Component {
 
         return (
             <div className="game-field">
-                <h2>{this.state.currScore}</h2>
+                <h2
+                    className={
+                        !this.state.startGame
+                            ? "onStartMakeInvisible"
+                            : "current-score"
+                    }
+                >
+                    {this.state.currScore}
+                </h2>
                 <div>
                     <button
                         className={

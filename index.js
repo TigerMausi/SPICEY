@@ -453,10 +453,7 @@ io.on("connection", socket => {
             var obj = jsonBehaviour[i];
             obj.keyword = obj.keyword.toLowerCase();
 
-            console.log("obj.keyword", obj.keyword);
-            console.log("obj.variations", obj.variations);
             console.log("USER SAID only data", data);
-            console.log(data.response.indexOf(obj.keyword) > -1);
 
             if (
                 obj.keyword == data.response ||
