@@ -22,6 +22,15 @@ canvas {
     height: 1050px;
 }
 
+.image-listening {
+    border-radius: 40%;
+}
+
+.current-score {
+    font-size: 30px;
+    color: green;
+}
+
 #board {
     width: 80%;
     padding: 2% 5%;
@@ -300,6 +309,22 @@ p {
     letter-spacing: 2px;
     color: #011627;
     font-size: 30px;
+}
+
+p.first {
+    margin-top: 130px;
+}
+
+p.startSpicey {
+    margin-top: 130px;
+}
+
+p.startSpicey:hover {
+    margin-top: 130px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.8);
+    transform: translateY(-10px) scale(1.02);
+    text-shadow: 51px 5px 15px #fff, 3px 1px 5px deepskyblue;
 }
 
 path {

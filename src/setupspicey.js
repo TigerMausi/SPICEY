@@ -8,7 +8,9 @@ import { getUserResponses } from "./actions";
 class StartSpicey extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            isTalking: false
+        };
 
         this.synthVoice = this.synthVoice.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -58,12 +60,22 @@ class StartSpicey extends React.Component {
                 // SPEACH HAS BEEN DETECTED
                 console.log("SOMEBODY IS TALKING");
 
+                this.setState({
+                    isTalking: true
+                });
+
                 // DO I NEED LIKE A SOCKET EVENT THAT LISTENS WHEN THE MOZILLA PROPERTY HAS BEEN CALLED
             };
 
             recognition.onspeechend = () => {
                 recognition.stop();
             };
+
+            setTimeout(() => {
+                this.setState({
+                    isTalking: false
+                });
+            }, 6000);
 
             recognition.onerror = e => {
                 text = "Error occurred in recognition: " + e.error;
@@ -121,6 +133,10 @@ class StartSpicey extends React.Component {
     }
 
     render() {
+        const img = `
+            <img src="./images/listening.gif" alt="listening face">
+        `;
+
         console.log("this props", this.props);
         return (
             <div className="start-talking-to-spicey">
@@ -128,6 +144,13 @@ class StartSpicey extends React.Component {
                 <p className="startSpicey" onClick={this.handleClick}>
                     start talking to Spicey
                 </p>
+                {this.state.isTalking && (
+                    <img
+                        className="image-listening"
+                        src="./images/listening.gif"
+                        alt="listening face"
+                    />
+                )}
             </div>
         );
     }

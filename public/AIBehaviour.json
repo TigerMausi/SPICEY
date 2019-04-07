@@ -2,27 +2,19 @@
     {
         "keyword": "I am",
         "variations": ["my name is", "nice to meet you", "i am fine thank you"],
-        "responses": [
-            "Nice to meet you what plans do you have for today?",
-            "Nice to meet you how are you today?",
-            "Nice to meet you do you want to have some fun playing a game I prepared for you?"
-        ]
+        "responses": ["Nice to meet you i am spicy"]
     },
 
     {
         "keyword": "drunk",
-        "variations": ["I want to get drunk"],
+        "variations": ["Let us get drunk"],
         "responses": ["Can I join?", "Cool. That sounds like fun"]
     },
 
     {
         "keyword": "My name is",
         "variations": ["My name is", "Nice to meet you"],
-        "responses": [
-            "Nice to meet you what plans do you have for today?",
-            "Nice to meet you how are you today?",
-            "Nice to meet you do you want to have some fun playing a game I prepared for you?"
-        ]
+        "responses": ["Nice to meet you i am spicy"]
     },
     {
         "keyword": "yes",
@@ -31,7 +23,7 @@
     },
     {
         "keyword": "play",
-        "variations": ["Yes I want to play", " I would like to play"],
+        "variations": ["I want to play", "I would like to play"],
         "responses": ["Then let us start our game", "Then let us play"]
     },
     {
@@ -63,6 +55,23 @@
         ]
     },
     {
+        "keyword": "stack",
+        "variations": ["What is your stack"],
+        "responses": [
+            "React, redux, postgres, socket io everywhere ... i think we lost count"
+        ]
+    },
+    {
+        "keyword": "api",
+        "variations": ["What api am I"],
+        "responses": ["The API is SpeechSynthesis"]
+    },
+    {
+        "keyword": "ABM",
+        "variations": ["What abm am I"],
+        "responses": ["The API is SpeechSynthesis"]
+    },
+    {
         "keyword": "hello",
         "variations": ["hello", "hi", "hello spicey", "hello spicing"],
         "responses": [
@@ -84,7 +93,7 @@
             "how are you spicing"
         ],
         "responses": [
-            "I am excited to talk to all of you Wintergreenies, and you?"
+            "I am excited to talk to all of you. Do you want to play a game?"
         ]
     },
     {
